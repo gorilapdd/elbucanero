@@ -737,6 +737,8 @@ ul {
   border-radius: 4px;
 }
 
+
+
 /* -------------------------------------------------------------
    RESPONSIVE: TABLET / DESKTOP
    ------------------------------------------------------------- */
@@ -786,5 +788,294 @@ ul {
 @media (min-width: 1440px) {
   .product-list {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* -------------------------------------------------------------
+   MODAL DE DATOS DEL PEDIDO
+   ------------------------------------------------------------- */
+.order-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(10, 8, 6, 0.78);
+  backdrop-filter: blur(4px);
+
+  animation: order-modal-fade 0.2s ease both;
+}
+
+.order-modal-overlay[hidden] {
+  display: none;
+}
+
+@keyframes order-modal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.order-modal {
+  position: relative;
+
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-elevated);
+
+  padding: 28px 20px 22px;
+
+  animation: order-modal-in 0.22s ease both;
+}
+
+@keyframes order-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.order-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: var(--radius-pill);
+
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--color-border);
+
+  color: var(--color-cream);
+  font-size: 15px;
+
+  display: grid;
+  place-items: center;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.order-modal-close:hover {
+  background: var(--color-border);
+}
+
+.order-modal-close:active {
+  transform: scale(0.9);
+}
+
+/* -------------------------------------------------------------
+   CONTENIDO DEL MODAL DE PEDIDO
+   ------------------------------------------------------------- */
+
+.order-step {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.order-step h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+
+  text-align: center;
+
+  margin: 0 30px 8px;
+
+  color: var(--color-cream);
+}
+
+/* -------------------------------------------------------------
+   MÉTODOS DE PAGO
+   ------------------------------------------------------------- */
+
+.payment-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.payment-options button {
+  min-height: 105px;
+
+  padding: 16px 12px;
+
+  border-radius: var(--radius-md);
+
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+
+  color: var(--color-cream);
+
+  font-size: 28px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.payment-options button span {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.payment-options button:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-accent);
+}
+
+.payment-options button:active {
+  transform: scale(0.96);
+}
+
+/* -------------------------------------------------------------
+   INPUTS
+   ------------------------------------------------------------- */
+
+.order-step input {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 15px;
+
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+
+  color: var(--color-cream);
+
+  font-family: var(--font-body);
+  font-size: 15px;
+
+  outline: none;
+
+  transition: border-color 0.15s ease;
+}
+
+.order-step input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.order-step input:focus {
+  border-color: var(--color-accent);
+}
+
+/* Quita las flechas del input numérico */
+.order-step input[type="number"]::-webkit-inner-spin-button,
+.order-step input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.order-step input[type="number"] {
+  appearance: textfield;
+}
+
+/* -------------------------------------------------------------
+   CAMBIO
+   ------------------------------------------------------------- */
+
+#change-preview {
+  margin: -2px 0 2px;
+
+  text-align: center;
+
+  color: var(--color-text-muted);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------
+   BOTÓN CONTINUAR
+   ------------------------------------------------------------- */
+
+#continue-order {
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 13px 18px;
+
+  border-radius: var(--radius-pill);
+
+  background: var(--color-accent);
+  color: #1a1410;
+
+  font-size: 14.5px;
+  font-weight: 700;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+#continue-order:hover {
+  background: var(--color-accent-dark);
+}
+
+#continue-order:active {
+  transform: scale(0.97);
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE — CELULAR
+   ------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .order-modal-overlay {
+    padding: 16px;
+  }
+
+  .order-modal {
+    max-height: calc(100vh - 32px);
+    padding: 26px 16px 18px;
+  }
+
+  .payment-options {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-options button {
+    min-height: 70px;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .payment-options button span {
+    font-size: 14px;
   }
 }

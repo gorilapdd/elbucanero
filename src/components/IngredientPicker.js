@@ -17,8 +17,21 @@ import { config } from "../data/config.js";
 // que lo usa pueda insertar `element` en el DOM, leer el estado
 // actual con `getState()`, y reaccionar a cambios con `onChange(cb)`.
 export function createIngredientPicker({ mode }) {
-  const { steppers, toggles } = config.customBurger;
-  const state = {};
+const { steppers, toggles: allToggles } = config.customBurger;
+
+const addonIngredientIds = [
+  "huevo",
+  "pepinillos",
+  "cebolla",
+  "tomate",
+  "lechuga",
+];
+
+const toggles =
+  mode === "addon"
+    ? allToggles.filter((toggle) => addonIngredientIds.includes(toggle.id))
+    : allToggles;
+      const state = {};
 
   steppers.forEach((stepper) => {
     state[stepper.id] = mode === "base" ? stepper.base : 0;
@@ -30,9 +43,11 @@ export function createIngredientPicker({ mode }) {
   const container = document.createElement("div");
   container.className = "ingredient-picker";
 
-  const steppersHtml = steppers
-    .map(
-      (stepper) => `
+const steppersToShow = steppers;
+
+const steppersHtml = steppersToShow
+  .map(
+    (stepper) => `
       <div class="config-row">
         <span class="config-label">${stepper.emoji} ${stepper.label}</span>
         <div class="stepper">
@@ -42,8 +57,8 @@ export function createIngredientPicker({ mode }) {
         </div>
       </div>
     `
-    )
-    .join("");
+  )
+  .join("");
 
   const chipsHtml = `
     <div class="ingredient-chips">

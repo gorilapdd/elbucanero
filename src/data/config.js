@@ -57,7 +57,7 @@ export const config = {
         emoji: "🧀",
         base: 4, // cantidad incluida en la base de $250
         max: 8,
-        extraPrice: 0, // PENDIENTE — precio de cada cheddar adicional
+        extraPrice: 30, // PENDIENTE — precio de cada cheddar adicional
       },
     ],
 
@@ -67,13 +67,13 @@ export const config = {
       { id: "provolone", label: "Provolone", emoji: "🧀", includedInBase: false, extraPrice: 0 }, // PENDIENTE
       { id: "catupiry", label: "Catupiry", emoji: "🧈", includedInBase: false, extraPrice: 0 }, // PENDIENTE
       { id: "bacon", label: "Bacon", emoji: "🥓", includedInBase: false, extraPrice: 0 }, // PENDIENTE
-      { id: "huevo", label: "Huevo", emoji: "🍳", includedInBase: false, extraPrice: 0 }, // PENDIENTE
-      { id: "lechuga", label: "Lechuga", emoji: "🥬", includedInBase: false, extraPrice: 0 }, // PENDIENTE
-      { id: "tomate", label: "Tomate", emoji: "🍅", includedInBase: false, extraPrice: 0 }, // PENDIENTE
-      { id: "cebolla", label: "Cebolla", emoji: "🧅", includedInBase: true, extraPrice: 0 },
+      { id: "huevo", label: "Huevo", emoji: "🍳", includedInBase: false, extraPrice: 30 }, // PENDIENTE
+      { id: "lechuga", label: "Lechuga", emoji: "🥬", includedInBase: false, extraPrice: 10 }, // PENDIENTE
+      { id: "tomate", label: "Tomate", emoji: "🍅", includedInBase: false, extraPrice: 20 }, // PENDIENTE
+      { id: "cebolla", label: "Cebolla", emoji: "🧅", includedInBase: true, extraPrice: 30 },
       { id: "cebolla-caramelizada", label: "Cebolla caramelizada", emoji: "🧅", includedInBase: false, extraPrice: 0 }, // PENDIENTE
       { id: "cebolla-crispy", label: "Cebolla crispy", emoji: "🧅", includedInBase: false, extraPrice: 0 }, // PENDIENTE
-      { id: "pepinillos", label: "Pepinillos", emoji: "🥒", includedInBase: false, extraPrice: 0 }, // PENDIENTE
+      { id: "pepinillos", label: "Pepinillos", emoji: "🥒", includedInBase: false, extraPrice: 30 }, // PENDIENTE
       { id: "ketchup", label: "Ketchup", emoji: "🍅", includedInBase: false, extraPrice: 0 }, // PENDIENTE
       { id: "salsa-casa", label: "Salsa de la Casa", emoji: "🥫", includedInBase: false, extraPrice: 0 }, // PENDIENTE
       { id: "barbacoa", label: "Barbacoa", emoji: "🥫", includedInBase: true, extraPrice: 0 },
