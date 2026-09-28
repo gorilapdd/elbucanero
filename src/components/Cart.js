@@ -33,9 +33,11 @@ export function renderCart(root, { isOpen, onClose }) {
         <h2>Tu pedido</h2>
         <button class="modal-close" type="button" aria-label="Cerrar carrito">✕</button>
       </div>
+
       <div class="cart-items">
         ${empty ? `<p class="cart-empty">Tu carrito está vacío.<br />Agregá algo delicioso 🍔</p>` : ""}
       </div>
+
       ${
         empty
           ? ""
@@ -45,9 +47,15 @@ export function renderCart(root, { isOpen, onClose }) {
             <span>TOTAL</span>
             <span id="cart-total-amount">${formatPrice(getTotal())}</span>
           </div>
-          <button class="order-btn" id="order-btn" type="button">Realizar pedido</button>
+
+          <button class="order-btn" id="order-btn" type="button">
+            Realizar pedido
+          </button>
+
           <p class="whatsapp-hint" id="whatsapp-hint" hidden>
-            Falta configurar el número de WhatsApp en <code>src/data/config.js</code> para poder enviar el pedido.
+            Falta configurar el número de WhatsApp en
+            <code>src/data/config.js</code>
+            para poder enviar el pedido.
           </p>
         </div>
       `
@@ -60,17 +68,45 @@ export function renderCart(root, { isOpen, onClose }) {
   cart.forEach((item) => {
     const row = document.createElement("div");
     row.className = "cart-item";
+
     row.innerHTML = `
       <div class="cart-item-info">
         <p class="cart-item-name">${item.quantity}x ${item.name}</p>
         ${renderItemDetailLines(item)}
-        <p class="cart-item-price">${formatPrice(item.unitPrice * item.quantity)}</p>
+        <p class="cart-item-price">
+          ${formatPrice(item.unitPrice * item.quantity)}
+        </p>
       </div>
+
       <div class="cart-item-controls">
-        <button class="qty-btn" data-action="dec" type="button" aria-label="Disminuir cantidad de ${item.name}">-</button>
+        <button
+          class="qty-btn"
+          data-action="dec"
+          type="button"
+          aria-label="Disminuir cantidad de ${item.name}"
+        >
+          -
+        </button>
+
         <span class="qty-value">${item.quantity}</span>
-        <button class="qty-btn" data-action="inc" type="button" aria-label="Aumentar cantidad de ${item.name}">+</button>
-        <button class="remove-btn" data-action="remove" type="button" aria-label="Eliminar ${item.name} del carrito">🗑</button>
+
+        <button
+          class="qty-btn"
+          data-action="inc"
+          type="button"
+          aria-label="Aumentar cantidad de ${item.name}"
+        >
+          +
+        </button>
+
+        <button
+          class="remove-btn"
+          data-action="remove"
+          type="button"
+          aria-label="Eliminar ${item.name} del carrito"
+        >
+          🗑
+        </button>
       </div>
     `;
 
@@ -94,21 +130,168 @@ export function renderCart(root, { isOpen, onClose }) {
   });
 
   overlay.querySelector(".modal-close").addEventListener("click", onClose);
+
   overlay.addEventListener("click", (event) => {
     if (event.target === overlay) onClose();
   });
 
   const orderBtn = overlay.querySelector("#order-btn");
+
   if (orderBtn) {
     orderBtn.addEventListener("click", () => {
-      const url = getWhatsappOrderUrl(cart);
-      if (!url) {
-        overlay.querySelector("#whatsapp-hint").hidden = false;
-        return;
-      }
-      window.open(url, "_blank");
+      const cartFooter = overlay.querySelector(".cart-footer");
+
+      cartFooter.innerHTML = `
+        <div class="order-step">
+          <h3>¿Cómo querés pagar?</h3>
+
+          <div class="payment-options">
+            <button type="button" id="payment-transfer">
+              🏦 Transferencia
+            </button>
+
+            <button type="button" id="payment-cash">
+              💵 Efectivo
+            </button>
+          </div>
+        </div>
+      `;
+
+      const transferBtn = overlay.querySelector("#payment-transfer");
+      const cashBtn = overlay.querySelector("#payment-cash");
+
+transferBtn.addEventListener("click", () => {
+  cartFooter.innerHTML = `
+    <div class="order-step">
+      <h3>¿A nombre de quién es el pedido?</h3>
+
+      <input
+        type="text"
+        id="customer-name"
+        placeholder="Tu nombre"
+        autocomplete="name"
+      />
+
+      <button type="button" id="continue-order">
+        Continuar
+      </button>
+    </div>
+  `;
+
+  const continueBtn = overlay.querySelector("#continue-order");
+
+  continueBtn.addEventListener("click", () => {
+    const name = overlay.querySelector("#customer-name").value.trim();
+
+    if (!name) {
+      alert("Por favor, ingresá tu nombre.");
+      return;
+    }
+
+    const url = getWhatsappOrderUrl(cart, {
+      name,
+      paymentMethod: "TRANSFERENCIA",
+    });
+
+    if (!url) {
+      alert("Falta configurar el número de WhatsApp en config.js");
+      return;
+    }
+
+    window.open(url, "_blank");
+  });
+});
+
+cashBtn.addEventListener("click", () => {
+  const total = getTotal();
+
+  cartFooter.innerHTML = `
+    <div class="order-step">
+      <h3>Datos del pedido</h3>
+
+      <input
+        type="text"
+        id="customer-name"
+        placeholder="Tu nombre"
+        autocomplete="name"
+      />
+
+      <input
+        type="number"
+        id="cash-amount"
+        placeholder="¿Con cuánto vas a pagar?"
+        min="${total}"
+        step="1"
+      />
+
+      <p id="change-preview">
+        Cambio: $0
+      </p>
+
+      <button type="button" id="continue-order">
+        Continuar
+      </button>
+    </div>
+  `;
+
+  const nameInput = overlay.querySelector("#customer-name");
+  const cashInput = overlay.querySelector("#cash-amount");
+  const changePreview = overlay.querySelector("#change-preview");
+  const continueBtn = overlay.querySelector("#continue-order");
+
+  cashInput.addEventListener("input", () => {
+    const cashAmount = Number(cashInput.value);
+
+    if (!cashAmount) {
+      changePreview.textContent = "Cambio: $0";
+      return;
+    }
+
+    const change = cashAmount - total;
+
+    if (change < 0) {
+      changePreview.textContent = `Faltan ${formatPrice(Math.abs(change))}`;
+      return;
+    }
+
+    changePreview.textContent = `Cambio: ${formatPrice(change)}`;
+  });
+
+  continueBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    const cashAmount = Number(cashInput.value);
+
+    if (!name) {
+      alert("Por favor, ingresá tu nombre.");
+      return;
+    }
+
+    if (!cashAmount || cashAmount < total) {
+      alert(`El monto debe ser igual o mayor a ${formatPrice(total)}.`);
+      return;
+    }
+
+    const change = cashAmount - total;
+
+    const url = getWhatsappOrderUrl(cart, {
+      name,
+      paymentMethod: "EFECTIVO",
+      cashAmount,
+      change,
+    });
+
+    if (!url) {
+      alert("Falta configurar el número de WhatsApp en config.js");
+      return;
+    }
+
+    window.open(url, "_blank");
+  });
+});
     });
   }
 
   root.appendChild(overlay);
 }
+
+

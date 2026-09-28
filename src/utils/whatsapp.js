@@ -12,7 +12,7 @@ function itemDetailLines(item) {
   return [];
 }
 
-export function buildOrderMessage(cartItems) {
+export function buildOrderMessage(cartItems, orderInfo = {}) {
   const header = `🍔 PEDIDO - ${config.businessName.toUpperCase()}`;
   const divider = "----------------";
 
@@ -30,12 +30,37 @@ export function buildOrderMessage(cartItems) {
     0
   );
 
-  return [header, "", blocks.join("\n\n"), "", divider, `TOTAL: ${formatPrice(total)}`].join("\n");
+const { name = "", paymentMethod = "", cashAmount = 0, change = 0 } = orderInfo;
+
+const orderDetails = [
+  `👤 NOMBRE: ${name}`,
+  `💳 MÉTODO DE PAGO: ${paymentMethod}`,
+];
+
+if (paymentMethod === "EFECTIVO") {
+  orderDetails.push(
+    `💵 PAGA CON: ${formatPrice(cashAmount)}`,
+    `💸 CAMBIO: ${formatPrice(change)}`
+  );
+}
+
+return [
+  header,
+  "",
+  ...orderDetails,
+  "",
+  divider,
+  "",
+  blocks.join("\n\n"),
+  "",
+  divider,
+  `TOTAL: ${formatPrice(total)}`,
+].join("\n");
 }
 
 // Devuelve el enlace de WhatsApp listo para abrir, o `null` si
 // todavía no se configuró el número (config.whatsappNumber).
-export function getWhatsappOrderUrl(cartItems) {
+export function getWhatsappOrderUrl(cartItems, orderInfo = {}) {
   if (!cartItems || cartItems.length === 0) return null;
 
   const number = (config.whatsappNumber || "").trim();
@@ -43,7 +68,7 @@ export function getWhatsappOrderUrl(cartItems) {
     return null; // PENDIENTE: falta configurar el número real en config.js
   }
 
-  const message = buildOrderMessage(cartItems);
+const message = buildOrderMessage(cartItems, orderInfo);
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${number}?text=${encodedMessage}`;
 }
