@@ -54,7 +54,7 @@ export const products = [
     description: `Armá tu propia hamburguesa. Base incluida: ${smashStepper.base} smash, ${cheddarStepper.base} cheddar, cebolla y barbacoa.`,
     price: config.customBurger.basePrice,
     category: "hamburguesas",
-    image: "assets/images/placeholder-burger.svg",
+    image: "assets/images/personalizada.jpg",
     customizable: true,
   },
   {
