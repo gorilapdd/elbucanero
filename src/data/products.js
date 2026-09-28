@@ -34,7 +34,7 @@ export const products = [
     description: "Doble smash, cheddar x4, cebolla y salsa barbacoa. (DEMO)",
     price: 250,
     category: "hamburguesas",
-    image: "/assets/images/placeholder-burger.svg",
+    image: "assets/images/placeholder-burger.svg",
     customizable: false,
     allowsExtras: true,
   },
@@ -44,7 +44,7 @@ export const products = [
     description: `Armá tu propia hamburguesa. Base incluida: ${smashStepper.base} smash, ${cheddarStepper.base} cheddar, cebolla y barbacoa.`,
     price: config.customBurger.basePrice,
     category: "hamburguesas",
-    image: "/assets/images/placeholder-burger.svg",
+    image: "assets/images/placeholder-burger.svg",
     customizable: true,
   },
   {
@@ -53,7 +53,7 @@ export const products = [
     description: "Papas fritas crocantes con sal de la casa. (DEMO)",
     price: 150,
     category: "papas",
-    image: "/assets/images/placeholder-fries.svg",
+    image: "assets/images/placeholder-fries.svg",
     customizable: false,
   },
   {
@@ -62,7 +62,7 @@ export const products = [
     description: "A elección del cliente. (DEMO)",
     price: 100,
     category: "bebidas",
-    image: "/assets/images/placeholder-drink.svg",
+    image: "assets/images/placeholder-drink.svg",
     customizable: false,
   },
 ];
