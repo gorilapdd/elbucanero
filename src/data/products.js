@@ -29,12 +29,22 @@ const cheddarStepper = config.customBurger.steppers.find((s) => s.id === "chedda
 // }
 export const products = [
   {
-    id: "barbacoa",
-    name: "La Barbacoa",
-    description: "Doble smash, cheddar x4, cebolla y salsa barbacoa. (DEMO)",
-    price: 250,
+    id: "la carta del tesoro",
+    name: "LA CARTA DEL TESORO 🏴‍☠️",
+    description: "Doble smash, cheddar x4, bacon, huevo, cebolla caramelizada y nuestras salsas de la casa.",
+    price: 350,
     category: "hamburguesas",
-    image: "assets/images/placeholder-burger.svg",
+    image: "assets/images/lacartadeltesoro.jpg",
+    customizable: false,
+    allowsExtras: true,
+  },
+    {
+    id: "el rey de los siete mares",
+    name: "EL REY DE LOS SIETE MARES",
+    description: "Doble smash, cheddar x2, muzza x2 y provolone x2",
+    price: 300,
+    category: "hamburguesas",
+    image: "assets/images/elreydelossietemares.jpg",
     customizable: false,
     allowsExtras: true,
   },
