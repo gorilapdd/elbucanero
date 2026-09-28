@@ -1,0 +1,15 @@
+{
+  "name": "el-bucanero",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Carta digital interactiva para El Bucanero",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

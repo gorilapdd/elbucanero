@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>El Bucanero | Carta Digital</title>
+    <meta name="description" content="Carta digital de El Bucanero. Pedí tu hamburguesa y recibí el pedido por WhatsApp." />
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <div class="header-inner">
+          <div class="brand">
+            <span class="brand-icon" aria-hidden="true">🏴‍☠️</span>
+            <h1 class="brand-name">EL BUCANERO</h1>
+          </div>
+          <button
+            id="cart-toggle-btn"
+            class="icon-btn cart-icon-btn"
+            type="button"
+            aria-label="Ver carrito"
+            aria-haspopup="dialog"
+          >
+            🛒
+            <span id="cart-count-badge" class="cart-badge" hidden>0</span>
+          </button>
+        </div>
+      </header>
+
+      <nav id="category-nav" class="category-nav" aria-label="Categorías del menú"></nav>
+
+      <main id="product-list" class="product-list" aria-live="polite"></main>
+
+      <div id="modal-root"></div>
+      <div id="cart-root"></div>
+
+      <button
+        id="floating-cart-btn"
+        class="floating-cart-btn"
+        type="button"
+        hidden
+        aria-label="Abrir carrito"
+      >
+        <span class="fc-icon" aria-hidden="true">🛒</span>
+        <span id="fc-count">0</span>
+        <span class="fc-divider" aria-hidden="true">•</span>
+        <span id="fc-total">$0</span>
+      </button>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
