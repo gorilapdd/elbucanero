@@ -28,6 +28,16 @@ const cheddarStepper = config.customBurger.steppers.find((s) => s.id === "chedda
 //                          // (ej. "un smash más") sin pasar por el configurador completo
 // }
 export const products = [
+    {
+    id: "el corsario",
+    name: "⚔️ EL CORSARIO ⚔️",
+    description: "Doble smash, cheddar x4, bacon crocante y nuestras salsas de la casa.",
+    price: 350,
+    category: "hamburguesas",
+    image: "assets/images/elcorsario.jpg",
+    customizable: false,
+    allowsExtras: true,
+  },
   {
     id: "la carta del tesoro",
     name: "LA CARTA DEL TESORO 🏴‍☠️",
@@ -41,7 +51,7 @@ export const products = [
     {
     id: "el rey de los siete mares",
     name: "EL REY DE LOS SIETE MARES",
-    description: "Doble smash, cheddar x2, muzza x2 y provolone x2",
+    description: "Doble smash, cheddar x2, muzza x2 y, provolone x2 y nuestras salsas de la casa.",
     price: 300,
     category: "hamburguesas",
     image: "assets/images/elreydelossietemares.jpg",
@@ -67,12 +77,21 @@ export const products = [
     customizable: false,
   },
   {
-    id: "gaseosa",
-    name: "Gaseosa 500ml",
-    description: "A elección del cliente. (DEMO)",
-    price: 100,
+    id: "coca cola ",
+    name: "coca cola ",
+    description: "",
+    price: 60,
     category: "bebidas",
-    image: "assets/images/placeholder-drink.svg",
+    image: "assets/images/cocacola.jpg",
+    customizable: false,
+  },
+    {
+    id: "coca cola zero",
+    name: "coca cola zero",
+    description: "",
+    price: 60,
+    category: "bebidas",
+    image: "assets/images/cocacolazero.jpg",
     customizable: false,
   },
 ];
