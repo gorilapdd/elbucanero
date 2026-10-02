@@ -16,7 +16,7 @@ export const config = {
 
   // PENDIENTE: número de WhatsApp en formato internacional, SIN "+" ni espacios.
   // Ejemplo Uruguay: "59899123456"
-  whatsappNumber: "59892933423",
+  whatsappNumber: "59899030755",
 
   currencySymbol: "$",
 
